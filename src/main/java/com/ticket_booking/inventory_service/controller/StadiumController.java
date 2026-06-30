@@ -10,9 +10,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
+@Tag(
+        name = "Stadium Management",
+        description = "APIs for managing stadiums"
+)
 @RestController
 @RequestMapping("/api/v1/stadiums")
 @RequiredArgsConstructor
@@ -20,6 +26,10 @@ public class StadiumController {
 
     private final StadiumService stadiumService;
 
+    @Operation(
+            summary = "Create Stadium",
+            description = "Creates a new stadium."
+    )
     @PostMapping
     public ResponseEntity<ApiResponse<StadiumResponse>> createStadium(
             @Valid @RequestBody CreateStadiumRequest request) {
@@ -36,6 +46,10 @@ public class StadiumController {
                 );
     }
 
+    @Operation(
+            summary = "Get All Stadiums",
+            description = "Fetch all stadiums."
+    )
     @GetMapping
     public ResponseEntity<ApiResponse<List<StadiumResponse>>> getAllStadiums() {
 
@@ -50,6 +64,10 @@ public class StadiumController {
         );
     }
 
+    @Operation(
+            summary = "Get Stadium",
+            description = "Fetch stadium by id."
+    )
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<StadiumResponse>> getStadiumById(
             @PathVariable Long id) {
@@ -65,6 +83,10 @@ public class StadiumController {
         );
     }
 
+    @Operation(
+            summary = "Update Stadium",
+            description = "Update an existing stadium."
+    )
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<StadiumResponse>> updateStadium(
             @PathVariable Long id,
@@ -81,6 +103,10 @@ public class StadiumController {
         );
     }
 
+    @Operation(
+            summary = "Delete Stadium",
+            description = "Delete stadium by id."
+    )
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteStadium(
             @PathVariable Long id) {

@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,14 +12,26 @@ import lombok.*;
 @Builder
 public class CreateStadiumRequest {
 
+    @Schema(
+            description = "Stadium name",
+            example = "M. Chinnaswamy Stadium"
+    )
     @NotBlank(message = "Stadium name is required")
-    @Size(max = 150, message = "Stadium name must not exceed 150 characters")
+    @Size(max = 150)
     private String name;
 
-    @NotBlank(message = "City is required")
-    @Size(max = 100, message = "City must not exceed 100 characters")
+    @Schema(
+            description = "City where the stadium is located",
+            example = "Bengaluru"
+    )
+    @NotBlank
+    @Size(max = 100)
     private String city;
 
-    @Positive(message = "Capacity must be greater than zero")
+    @Schema(
+            description = "Maximum seating capacity",
+            example = "40000"
+    )
+    @Positive
     private Integer capacity;
 }
